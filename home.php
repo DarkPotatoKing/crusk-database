@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Home</title>
 </head>
 <body>
     <?php
@@ -26,18 +26,20 @@ session_start();
         {
             $query = "SELECT * FROM Stalkers WHERE username=? AND password=?";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("ss", $_POST["username"], $_POST["password"]);
+            $stmt->bind_param("ss", $_SESSION["username"], $_SESSION["password"]);
             $stmt->execute();
             $result = $stmt->fetch();
             if ($result)
             {
-                $_SESSION["username"] = $_POST["username"];
-                $_SESSION["password"] = $_POST["password"];
-                echo '<script type="text/javascript"> window.location = "//localhost/cruskdb/home.php"</script>';
+                echo "Hello " . $_SESSION["username"];
+                echo '<form method="POST" action="logout.php">
+                       <input type="submit" value="Logout">
+                      </form>';
+
             }
             else
             {
-                echo "Invalid username/password.";
+                echo "You are not logged in.";
             }
             $stmt->close();
         }
