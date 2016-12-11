@@ -9,9 +9,11 @@ session_start();
 </head>
 <body>
     <?php
-      $_SESSION["username"] = "";
-      $_SESSION["password"] = "";
+      session_destroy();
     ?>
-    You are logged out
+    Logging out...
+    <?php
+    echo '<script type="text/javascript"> window.location = "//localhost/cruskdb/"</script>';
+    ?>
 </body>
 </html>
