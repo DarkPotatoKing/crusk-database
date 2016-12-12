@@ -90,7 +90,7 @@ session_start();
 
             if ($num_rows == 0)
             {
-                echo "You have no cruks.";
+                echo "You have no crusks.";
             }
 
             $stmt->close();
