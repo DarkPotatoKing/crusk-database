@@ -57,8 +57,7 @@ session_start();
     </form>
 
 
-    <h1>Crusks</h1>
-
+    <br>
     <?php
         $servername = "localhost";
         $username = "root";
@@ -75,49 +74,49 @@ session_start();
         }
         else
         {
-            $query = "SELECT stalker_username, crusk_student_number FROM Stalks WHERE stalker_username=?";
+            $query = "SELECT student_number, name, facebook, twitter, instagram FROM Crusks WHERE student_number=?";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("s", $_SESSION["username"]);
+            $stmt->bind_param("s", $_POST["student_number"]);
             $stmt->execute();
-            $stmt->bind_result($col1, $crusk_student_number);
+            $stmt->bind_result($student_number, $name, $facebook, $twitter, $instagram);
             $num_rows = 0;
-            $student_numbers = array();
             while ($stmt->fetch())
             {
-                array_push($student_numbers, $crusk_student_number);
-                $num_rows = $num_rows + 1;
-            }
-
-            if ($num_rows == 0)
-            {
-                echo "You have no crusks.";
-            }
-
-            $stmt->close();
-
-            foreach ($student_numbers as $sn)
-            {
-                $query = "SELECT student_number, name, facebook, twitter, instagram FROM Crusks WHERE student_number=?";
-                $stmt = $conn->prepare($query);
-                $stmt->bind_param("s", $sn);
-                $stmt->execute();
-                $stmt->bind_result($student_number, $name, $facebook, $twitter, $instagram);
-                $stmt->fetch();
                 echo '<li>';
                 echo $student_number . "<br>";
                 echo $name . "<br>";
                 echo $facebook . "<br>";
                 echo $twitter . "<br>";
                 echo $instagram . "<br>";
-                printf('<li><form method="POST" action="notes.php"><input type="hidden" name="student_number" value="%s"><input type="submit" value="Notes"></form></li>', $student_number);
-                printf('<li><form method="POST" action="unstalk.php"><input type="hidden" name="student_number" value="%s"><input type="submit" value="Unstalk"></form></li>', $student_number);
-                echo '</li><br>';
-                $stmt->close();
+                echo '</li>';
+
+                $num_rows = $num_rows + 1;
             }
 
+            $stmt->close();
+        }
+        echo '<h1>Notes<form method="POST" action="home.php"><input type="submit" value="Home"></form></h1>';
+
+        $query = "SELECT note FROM Notes WHERE stalker_username=? AND   crusk_student_number=?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ss", $_SESSION["username"],$_POST["student_number"]);
+        $stmt->execute();
+        $stmt->bind_result($notes);
+        $num_rows = 0;
+        while ($stmt->fetch())
+        {
+            echo $notes;
+            $num_rows = $num_rows + 1;
         }
 
+        if ($num_rows == 0)
+        {
+            echo 'No notes.';
+        }
+
+        $stmt->close();
         $conn->close();
     ?>
+
 </body>
 </html>
