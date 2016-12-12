@@ -1,6 +1,13 @@
 <?php
 // Start the session
 session_start();
+
+if (isset($_SESSION["currently_viewing"]))
+{
+    $_POST["student_number"] = $_SESSION["currently_viewing"];
+    unset($_SESSION["currently_viewing"]);
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -96,6 +103,11 @@ session_start();
             $stmt->close();
         }
         echo '<h1>Notes<form method="POST" action="home.php"><input type="submit" value="Home"></form></h1>';
+        echo '<form method="POST" action="add_note.php">
+                Note:<input type="text" name="note" value=""><br>';
+        printf('<input type="hidden" name="student_number" value="%s">', $_POST["student_number"]);
+        echo        '<input type="submit" value="Add note">
+              </form><br>';
 
         $query = "SELECT note FROM Notes WHERE stalker_username=? AND   crusk_student_number=?";
         $stmt = $conn->prepare($query);
