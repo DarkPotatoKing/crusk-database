@@ -109,16 +109,18 @@ if (isset($_SESSION["currently_viewing"]))
         echo        '<input type="submit" value="Add note">
               </form><br>';
 
-        $query = "SELECT note FROM Notes WHERE stalker_username=? AND   crusk_student_number=?";
+        $query = "SELECT note, id FROM Notes WHERE stalker_username=? AND   crusk_student_number=?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("ss", $_SESSION["username"],$_POST["student_number"]);
         $stmt->execute();
-        $stmt->bind_result($notes);
+        $stmt->bind_result($notes, $id);
         $num_rows = 0;
         while ($stmt->fetch())
         {
             echo $notes;
+            printf('<form method="POST" action="delete_note.php"><input type="hidden" name="student_number" value="%s"><input type="hidden" name="id" value="%s"><input type="submit" value="delete"></form>', $_POST["student_number"], $id);
             $num_rows = $num_rows + 1;
+            echo '<br>';
         }
 
         if ($num_rows == 0)
