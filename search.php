@@ -163,7 +163,7 @@ session_start();
                 echo '<b>'.$student_number . "</b><br>";
                 echo $facebook . "<br>";
                 echo $twitter . "<br>";
-                echo $instagram . "<br>";
+                echo $instagram . "<br><br>";
                 // printf('<form method="POST" action="stalk.php"><input type="hidden" name="student_number" value="%s"><input type="submit" value="Stalk"></form>', $student_number);
                 // <button type="submit" class="btn" >Log out</button>
                 printf('<form method="post" action="stalk.php">
