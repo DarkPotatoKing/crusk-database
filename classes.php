@@ -48,45 +48,45 @@ session_start();
     ?>
 
     <nav class="navbar navbar-default" role="navigation">
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="#">Hello <?php echo $_SESSION["username"]?></a>
-  </div>
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Hello <?php echo $_SESSION["username"]?></a>
+      </div>
 
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-    <ul class="nav navbar-nav">
-      <li><a href="/cruskdb/home.php">Crusks</a></li>
-      <li class="active"><a href="/cruskdb/classes.php">Classes</a></li>
-    </ul>
+        <ul class="nav navbar-nav">
+          <li><a href="/cruskdb/home.php">Crusks</a></li>
+          <li class="active"><a href="/cruskdb/classes.php">Classes</a></li>
+        </ul>
 
-    <div class="col-sm-3 col-md-3">
-        <form class="navbar-form" role="search" action="search.php" method="post">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="search_string">
-            <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        <div class="col-sm-3 col-md-3">
+            <form class="navbar-form" role="search" action="search.php" method="post">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" name="search_string">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
             </div>
+            </form>
         </div>
-        </form>
-    </div>
 
-    <ul class="nav navbar-nav navbar-right">
-      <li>
-        <form action="logout.php" method="post">
-            <button type="submit" class="btn" >Log out</button>
-        </form>
-      </li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <form action="logout.php" method="post">
+                <button type="submit" class="btn" >Log out</button>
+            </form>
+          </li>
+        </ul>
 
-  </div><!-- /.navbar-collapse -->
-</nav>
+      </div><!-- /.navbar-collapse -->
+    </nav>
 
     <div>
         <style scoped>
