@@ -165,7 +165,7 @@ session_start();
 
             $stmt->close();
 
-            echo "<ul>";
+            // echo "<ul>";
             foreach ($student_numbers as $sn)
             {
                 $query = "SELECT student_number, name, facebook, twitter, instagram FROM Crusks WHERE student_number=?";
@@ -175,17 +175,14 @@ session_start();
                 $stmt->bind_result($student_number, $name, $facebook, $twitter, $instagram);
                 $stmt->fetch();
                 echo '<li>';
-                echo '<img src="heart.png"></img>';
-                echo "<h3>".$name ."</h3>";
-                echo "<p>";
-                echo $student_number . "<br>";
+                echo "<h3>".$name ."</h3><br>";
+                echo '<b>'.$student_number.'</b>' . "<br>";
                 echo $facebook . "<br>";
                 echo $twitter . "<br>";
-                echo $instagram . "<br>";
-                echo "</p>";
-                echo "</li>";
-                printf('<form method="POST" action="notes.php"><input type="hidden" name="student_number" value="%s"><input type="submit" value="Notes"></form>', $student_number);
-                printf('<form method="POST" action="unstalk.php"><input type="hidden" name="student_number" value="%s"><input type="submit" value="Unstalk"></form>', $student_number);
+                echo $instagram . "<br><br>";
+                printf('<form method="POST" action="notes.php"><input type="hidden" name="student_number" value="%s"><button type="submit" class="btn btn-primary" >Notes</button></form><br>', $student_number);
+                printf('<form method="POST" action="unstalk.php"><input type="hidden" name="student_number" value="%s"><button type="submit" class="btn btn-primary" >Untalk</button></form>', $student_number);
+                echo "</li><br>";
 
                 // echo '<div class="btn-group">
                 //   <button type="button" class="btn btn-primary">Apple</button>
@@ -195,7 +192,7 @@ session_start();
 
                 $stmt->close();
             }
-            echo "</ul>";
+            // echo "</ul>";
 
         }
 
