@@ -22,6 +22,11 @@ session_start();
         {
             die("Connection failed: " . $conn->connect_error);
         }
+        else if (isset($_POST['class_name']) === FALSE)
+        {
+            echo '<script type="text/javascript"> window.location = "//localhost/cruskdb/classes.php"</script>';
+            exit();
+        }
         else
         {
             $query = "SELECT * FROM Stalkers WHERE username=? AND password=?";
@@ -51,15 +56,17 @@ session_start();
         $conn->close();
     ?>
 
-    <form method="POST" action="search.php">
-        <input type="text" name="search_string" value=""><br>
-        <input type="submit" value="search">
-    </form>
+    <form method="POST" action="home.php"><input type="submit" value="Home"></form>
 
-    <form method="POST" action="classes.php"><input type="submit" value="Classes"></form>
+    <form action="add_classmates.php" method="post">
 
-
-    <h1>Crusks</h1>
+    <?php echo $_POST['class_name'] ?>
+    <br />
+    <!-- <input type="checkbox" name="formDoor[]" value="A" />Acorn Building<br />
+    <input type="checkbox" name="formDoor[]" value="B" />Brown Hall<br />
+    <input type="checkbox" name="formDoor[]" value="C" />Carnegie Complex<br />
+    <input type="checkbox" name="formDoor[]" value="D" />Drake Commons<br />
+    <input type="checkbox" name="formDoor[]" value="E" />Elliot House<br /> -->
 
     <?php
         $servername = "localhost";
@@ -77,49 +84,52 @@ session_start();
         }
         else
         {
-            $query = "SELECT stalker_username, crusk_student_number FROM Stalks WHERE stalker_username=?";
+            $query = "SELECT crusk_student_number, id FROM Stalks WHERE stalker_username=?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param("s", $_SESSION["username"]);
             $stmt->execute();
-            $stmt->bind_result($col1, $crusk_student_number);
+            $stmt->bind_result($crusk_student_number, $stalk_id);
             $num_rows = 0;
             $student_numbers = array();
+            $stalk_ids = array();
             while ($stmt->fetch())
             {
                 array_push($student_numbers, $crusk_student_number);
+                array_push($stalk_ids, $stalk_id);
                 $num_rows = $num_rows + 1;
             }
 
             if ($num_rows == 0)
             {
                 echo "You have no crusks.";
+                exit();
             }
-
             $stmt->close();
 
-            foreach ($student_numbers as $sn)
+
+            for ($i=0; $i < $num_rows; $i++)
             {
-                $query = "SELECT student_number, name, facebook, twitter, instagram FROM Crusks WHERE student_number=?";
+                $query = "SELECT name FROM Crusks WHERE student_number=?";
                 $stmt = $conn->prepare($query);
-                $stmt->bind_param("s", $sn);
+                $stmt->bind_param("s", $student_numbers[$i]);
                 $stmt->execute();
-                $stmt->bind_result($student_number, $name, $facebook, $twitter, $instagram);
+                $stmt->bind_result($name);
                 $stmt->fetch();
-                echo '<li>';
-                echo $student_number . "<br>";
-                echo $name . "<br>";
-                echo $facebook . "<br>";
-                echo $twitter . "<br>";
-                echo $instagram . "<br>";
-                printf('<li><form method="POST" action="notes.php"><input type="hidden" name="student_number" value="%s"><input type="submit" value="Notes"></form></li>', $student_number);
-                printf('<li><form method="POST" action="unstalk.php"><input type="hidden" name="student_number" value="%s"><input type="submit" value="Unstalk"></form></li>', $student_number);
-                echo '</li><br>';
+                printf('<input type="checkbox" name="stalk_id[]" value="%s" />%s %s<br />',
+                        $stalk_ids[$i], $student_numbers[$i], $name);
                 $stmt->close();
             }
+            printf('<input type="hidden" name="class_id" value="%s">', $_POST['id']);
 
         }
-
         $conn->close();
     ?>
+
+
+    <input type="submit" name="formSubmit" value="Submit" />
+
+    </form>
+
+
 </body>
 </html>
