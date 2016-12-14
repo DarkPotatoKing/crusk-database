@@ -27,8 +27,8 @@ session_start();
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Crusks</a></li>
-      <li><a href="#">Classes</a></li>
+      <li class="active"><a href="/cruskdb/home.php">Crusks</a></li>
+      <li><a href="/cruskdb/classes.php">Classes</a></li>
     </ul>
 
     <div class="col-sm-3 col-md-3">
