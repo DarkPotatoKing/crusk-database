@@ -31,11 +31,6 @@ session_start();
             $result = $stmt->fetch();
             if ($result)
             {
-                echo "Hello " . $_SESSION["username"];
-                echo '<form method="POST" action="logout.php">
-                       <input type="submit" value="Logout">
-                      </form>';
-
             }
             else
             {
@@ -74,7 +69,6 @@ session_start();
                 /* execute query */
                 if ($stmt->execute() === true)
                 {
-                    echo "Edited note.";
                 }
                 /* close statement */
                 $stmt->close();
