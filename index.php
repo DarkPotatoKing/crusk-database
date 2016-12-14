@@ -16,11 +16,40 @@
   <div class="form">
 
       <ul class="tab-group">
-        <li class="tab active"><a href="#signup">Sign Up</a></li>
-        <li class="tab"><a href="#login">Log In</a></li>
+        <li class="tab active"><a href="#login">Log In</a></li>
+        <li class="tab"><a href="#signup">Sign Up</a></li>
       </ul>
 
       <div class="tab-content">
+
+
+        <div id="login">
+          <h1>Crusk Database</h1>
+
+          <form action="login.php" method="post">
+
+            <div class="field-wrap">
+            <label>
+              Username<span class="req">*</span>
+            </label>
+            <input type="text" name="username" required autocomplete="off"/>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Password<span class="req">*</span>
+            </label>
+            <input type="password"required name="password" autocomplete="off"/>
+          </div>
+
+          <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+          <button class="button button-block"/>Log In</button>
+
+          </form>
+
+        </div>
+
         <div id="signup">
           <h1>Crusk Database</h1>
 
@@ -48,33 +77,6 @@
           </div>
 
           <button type="submit" class="button button-block"/>Sign Up</button>
-
-          </form>
-
-        </div>
-
-        <div id="login">
-          <h1>Crusk Database</h1>
-
-          <form action="login.php" method="post">
-
-            <div class="field-wrap">
-            <label>
-              Username<span class="req">*</span>
-            </label>
-            <input type="text" name="username" required autocomplete="off"/>
-          </div>
-
-          <div class="field-wrap">
-            <label>
-              Password<span class="req">*</span>
-            </label>
-            <input type="password"required name="password" autocomplete="off"/>
-          </div>
-
-          <p class="forgot"><a href="#">Forgot Password?</a></p>
-
-          <button class="button button-block"/>Log In</button>
 
           </form>
 
