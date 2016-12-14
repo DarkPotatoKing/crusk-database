@@ -31,10 +31,6 @@ session_start();
             $result = $stmt->fetch();
             if ($result)
             {
-                echo "Hello " . $_SESSION["username"];
-                echo '<form method="POST" action="logout.php">
-                       <input type="submit" value="Logout">
-                      </form>';
 
             }
             else
@@ -74,14 +70,12 @@ session_start();
                 /* execute query */
                 if ($stmt->execute() === true)
                 {
-                    echo "Added class.";
                 }
                 /* close statement */
                 $stmt->close();
             }
 
         }
-        $_SESSION["currently_viewing"] = $_POST["student_number"];
         $conn->close();
         echo '<script type="text/javascript"> window.location = "//localhost/cruskdb/classes.php"</script>';
     ?>
