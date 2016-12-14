@@ -180,7 +180,7 @@ session_start();
                 echo $twitter . "<br>";
                 echo $instagram . "<br<br>";
                 printf('<form method="POST" action="notes.php"><input type="hidden" name="student_number" value="%s"><button type="submit" class="btn btn-primary" >Notes</button></form><br>', $student_number);
-                printf('<form method="POST" action="unstalk.php"><input type="hidden" name="student_number" value="%s"><button type="submit" class="btn btn-primary" >Untalk</button></form>', $student_number);
+                printf('<form method="POST" action="unstalk.php"><input type="hidden" name="student_number" value="%s"><button type="submit" class="btn btn-primary" >Unstalk</button></form>', $student_number);
                 echo "</li>";
 
                 // echo '<div class="btn-group">
