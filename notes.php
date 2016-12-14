@@ -118,6 +118,17 @@ if (isset($_SESSION["currently_viewing"]))
         while ($stmt->fetch())
         {
             echo $notes;
+            printf(
+                    '<form method="POST" action="edit_note.php">
+                        <input type="hidden" name="student_number" value="%s">
+                        <input type="hidden" name="id" value="%s">
+                        <input type="hidden" name="note" value="%s">
+                        <input type="submit" value="edit">
+                    </form>',
+                    $_POST["student_number"],
+                    $id,
+                    $notes
+                  );
             printf('<form method="POST" action="delete_note.php"><input type="hidden" name="student_number" value="%s"><input type="hidden" name="id" value="%s"><input type="submit" value="delete"></form>', $_POST["student_number"], $id);
             $num_rows = $num_rows + 1;
             echo '<br>';
