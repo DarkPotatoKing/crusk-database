@@ -20,7 +20,7 @@ session_start();
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">Crusk Database</a>
+    <a class="navbar-brand" href="#">Hello <?php echo $_SESSION["username"]?></a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,9 +32,9 @@ session_start();
     </ul>
 
     <div class="col-sm-3 col-md-3">
-        <form class="navbar-form" role="search">
+        <form class="navbar-form" role="search" action="search.php" method="post">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search" name="q">
+            <input type="text" class="form-control" placeholder="Search" name="search_string">
             <div class="input-group-btn">
                 <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
             </div>
@@ -76,10 +76,6 @@ session_start();
             $result = $stmt->fetch();
             if ($result)
             {
-                echo "Hello " . $_SESSION["username"];
-                echo '<form method="POST" action="logout.php">
-                       <input type="submit" value="Logout">
-                      </form>';
 
             }
             else
